@@ -1,0 +1,350 @@
+[
+  {
+    "slug": "canton-network",
+    "term": "Canton Network",
+    "definition": "A privacy-enabled interoperable blockchain network designed for institutional and decentralized finance, built on Daml smart contracts and synchronized via the Global Synchronizer.",
+    "relatedTerms": ["daml", "global-synchronizer", "canton-coin"]
+  },
+  {
+    "slug": "canton-coin",
+    "term": "Canton Coin (CC)",
+    "definition": "The native utility token of the Canton Network, used for transaction fees, staking, validator rewards, and governance participation.",
+    "relatedTerms": ["canton-network", "transaction-fee", "staking"]
+  },
+  {
+    "slug": "cbtc",
+    "term": "CBTC",
+    "definition": "Canton BTC — a Bitcoin-backed token on Canton Network issued by BitSafe, enabling BTC holders to participate in Canton DeFi without selling their Bitcoin.",
+    "relatedTerms": ["canton-network", "bitsafe", "tokenization"]
+  },
+  {
+    "slug": "daml",
+    "term": "Daml",
+    "definition": "A purpose-built smart contract language developed by Digital Asset, designed for privacy-preserving multi-party workflows with built-in authorization controls.",
+    "relatedTerms": ["digital-asset", "smart-contract", "canton-network"]
+  },
+  {
+    "slug": "synchronizer",
+    "term": "Synchronizer",
+    "definition": "A component in Canton that sequences and orders transactions atomically across multiple participants, ensuring consistency without revealing private data to non-involved parties.",
+    "relatedTerms": ["global-synchronizer", "transaction", "privacy"]
+  },
+  {
+    "slug": "global-synchronizer",
+    "term": "Global Synchronizer",
+    "definition": "The shared, network-wide synchronizer for Canton that enables cross-application atomic transactions and serves as the backbone for CC transfers and staking.",
+    "relatedTerms": ["synchronizer", "canton-network", "bandwidth"]
+  },
+  {
+    "slug": "validator",
+    "term": "Validator",
+    "definition": "A node operator on Canton Network that validates transactions, participates in consensus, and earns CC rewards for securing the network.",
+    "relatedTerms": ["super-validator", "staking", "validator-reward"]
+  },
+  {
+    "slug": "super-validator",
+    "term": "Super Validator",
+    "definition": "A top-tier validator on Canton Network with additional governance rights and higher staking requirements, responsible for critical network operations on the Global Synchronizer.",
+    "relatedTerms": ["validator", "governance", "global-synchronizer"]
+  },
+  {
+    "slug": "decparty",
+    "term": "DecParty",
+    "definition": "A decentralized party management and identity service on Canton enabling governance participation, validator coordination, and on-chain identity resolution.",
+    "relatedTerms": ["party", "governance", "validator"]
+  },
+  {
+    "slug": "canton-foundation",
+    "term": "Canton Foundation",
+    "definition": "The non-profit organization governing the Canton Network, overseeing the Global Synchronizer, CC distribution, and ecosystem grant programs.",
+    "relatedTerms": ["canton-network", "governance", "canton-coin"]
+  },
+  {
+    "slug": "cip",
+    "term": "CIP (Canton Improvement Proposal)",
+    "definition": "The formal process for proposing changes to the Canton Network protocol, analogous to EIPs on Ethereum. CIPs go through community review before implementation.",
+    "relatedTerms": ["governance", "canton-foundation", "canton-network"]
+  },
+  {
+    "slug": "bandwidth",
+    "term": "Bandwidth",
+    "definition": "The throughput capacity allocated to participants on the Global Synchronizer, measured in transaction units. Validators purchase bandwidth with CC to process transactions.",
+    "relatedTerms": ["global-synchronizer", "transaction-fee", "validator"]
+  },
+  {
+    "slug": "transaction-fee",
+    "term": "Transaction Fee",
+    "definition": "The cost paid in CC to process a transaction on Canton Network. Fees compensate validators and synchronizer operators for bandwidth and computational resources.",
+    "relatedTerms": ["canton-coin", "bandwidth", "validator"]
+  },
+  {
+    "slug": "privacy",
+    "term": "Privacy (Canton)",
+    "definition": "A core design principle of Canton where transaction details are only visible to directly involved parties, unlike public blockchains where all data is globally visible.",
+    "relatedTerms": ["sub-transaction", "canton-network", "daml"]
+  },
+  {
+    "slug": "sub-transaction",
+    "term": "Sub-Transaction",
+    "definition": "A component of a Canton transaction that is only visible to the parties directly involved, enabling privacy-preserving multi-step workflows across participants.",
+    "relatedTerms": ["privacy", "transaction", "party"]
+  },
+  {
+    "slug": "confirmation",
+    "term": "Confirmation",
+    "definition": "The process by which a Canton transaction is validated and committed by all required parties and the synchronizer, achieving finality.",
+    "relatedTerms": ["transaction", "synchronizer", "validator"]
+  },
+  {
+    "slug": "party",
+    "term": "Party",
+    "definition": "A logical identity on Canton Network that can own contracts, submit transactions, and observe state. Parties are the core unit of authorization in Daml.",
+    "relatedTerms": ["participant", "daml", "decparty"]
+  },
+  {
+    "slug": "participant",
+    "term": "Participant",
+    "definition": "A node in the Canton Network that hosts parties, stores their contract state, and submits transactions to synchronizers on their behalf.",
+    "relatedTerms": ["party", "synchronizer", "validator"]
+  },
+  {
+    "slug": "staking",
+    "term": "Staking",
+    "definition": "The process of locking CC tokens with a validator to help secure the Canton Network and earn proportional rewards from transaction fees and protocol emissions.",
+    "relatedTerms": ["canton-coin", "validator", "validator-reward"]
+  },
+  {
+    "slug": "validator-reward",
+    "term": "Validator Reward",
+    "definition": "CC tokens earned by validators and their delegators for participating in transaction validation and network consensus on Canton.",
+    "relatedTerms": ["validator", "staking", "canton-coin"]
+  },
+  {
+    "slug": "delegation",
+    "term": "Delegation",
+    "definition": "The act of assigning your CC stake to a validator without transferring custody, allowing passive participation in network security and reward earning.",
+    "relatedTerms": ["staking", "validator", "canton-coin"]
+  },
+  {
+    "slug": "commission",
+    "term": "Commission (Validator)",
+    "definition": "The percentage of staking rewards that a validator retains as compensation for operating infrastructure, with the remainder distributed to delegators.",
+    "relatedTerms": ["validator", "validator-reward", "delegation"]
+  },
+  {
+    "slug": "smart-contract",
+    "term": "Smart Contract",
+    "definition": "Self-executing code deployed on a blockchain that enforces agreed-upon rules between parties. On Canton, smart contracts are written in Daml.",
+    "relatedTerms": ["daml", "canton-network", "transaction"]
+  },
+  {
+    "slug": "transaction",
+    "term": "Transaction",
+    "definition": "An atomic state change on the Canton Network consisting of one or more sub-transactions that create, archive, or exercise choices on Daml contracts.",
+    "relatedTerms": ["sub-transaction", "confirmation", "transaction-fee"]
+  },
+  {
+    "slug": "tokenization",
+    "term": "Tokenization",
+    "definition": "The process of representing real-world assets (securities, commodities, currencies) as digital tokens on a blockchain like Canton Network.",
+    "relatedTerms": ["cbtc", "usdcx", "canton-network"]
+  },
+  {
+    "slug": "usdcx",
+    "term": "USDCx",
+    "definition": "The Canton Network representation of Circle's USDC stablecoin, providing dollar-pegged liquidity for DeFi protocols and trading on Canton.",
+    "relatedTerms": ["stablecoin", "canton-network", "circle"]
+  },
+  {
+    "slug": "stablecoin",
+    "term": "Stablecoin",
+    "definition": "A cryptocurrency designed to maintain a stable value relative to a reference asset, typically the US dollar. USDCx and USYC are examples on Canton.",
+    "relatedTerms": ["usdcx", "usyc", "defi"]
+  },
+  {
+    "slug": "usyc",
+    "term": "USYC",
+    "definition": "US Yield Coin by Hashnote — a tokenized short-duration US Treasury product on Canton that provides institutional-grade yield while maintaining on-chain liquidity.",
+    "relatedTerms": ["tokenization", "stablecoin", "hashnote"]
+  },
+  {
+    "slug": "defi",
+    "term": "DeFi (Decentralized Finance)",
+    "definition": "Financial services built on blockchain technology that operate without centralized intermediaries. Canton DeFi includes DEXs, lending protocols, and yield products.",
+    "relatedTerms": ["amm", "dex", "lending"]
+  },
+  {
+    "slug": "dex",
+    "term": "DEX (Decentralized Exchange)",
+    "definition": "A peer-to-peer marketplace for trading tokens without a central authority. Temple and Denex are Canton DEXs.",
+    "relatedTerms": ["amm", "defi", "liquidity-pool"]
+  },
+  {
+    "slug": "amm",
+    "term": "AMM (Automated Market Maker)",
+    "definition": "A DEX mechanism that uses mathematical formulas and liquidity pools instead of order books to determine asset prices and enable trades.",
+    "relatedTerms": ["dex", "liquidity-pool", "defi"]
+  },
+  {
+    "slug": "liquidity-pool",
+    "term": "Liquidity Pool",
+    "definition": "A smart contract holding paired token reserves that enables automated trading. Liquidity providers deposit tokens and earn fees from trades.",
+    "relatedTerms": ["amm", "liquidity-provider", "defi"]
+  },
+  {
+    "slug": "liquidity-provider",
+    "term": "Liquidity Provider (LP)",
+    "definition": "A user who deposits tokens into a liquidity pool to facilitate trading, earning a share of trading fees proportional to their contribution.",
+    "relatedTerms": ["liquidity-pool", "amm", "yield"]
+  },
+  {
+    "slug": "lending",
+    "term": "Lending Protocol",
+    "definition": "A DeFi protocol that allows users to lend assets to earn interest or borrow assets against collateral. Alpend is Canton's lending protocol.",
+    "relatedTerms": ["defi", "collateral", "yield"]
+  },
+  {
+    "slug": "collateral",
+    "term": "Collateral",
+    "definition": "Assets locked in a smart contract to secure a loan or position. On Canton, CC and CBTC can serve as collateral for borrowing on protocols like Alpend.",
+    "relatedTerms": ["lending", "liquidation", "cbtc"]
+  },
+  {
+    "slug": "liquidation",
+    "term": "Liquidation",
+    "definition": "The automatic sale of collateral when a borrower's position falls below the required collateral ratio, protecting lenders from losses.",
+    "relatedTerms": ["collateral", "lending", "defi"]
+  },
+  {
+    "slug": "yield",
+    "term": "Yield",
+    "definition": "The return earned on deposited or staked assets, expressed as an annual percentage. Sources include staking rewards, lending interest, and LP fees.",
+    "relatedTerms": ["staking", "liquidity-provider", "lending"]
+  },
+  {
+    "slug": "governance",
+    "term": "Governance",
+    "definition": "The decision-making process for protocol changes on Canton, including CIP proposals, validator voting, and Canton Foundation oversight.",
+    "relatedTerms": ["cip", "canton-foundation", "super-validator"]
+  },
+  {
+    "slug": "block-explorer",
+    "term": "Block Explorer",
+    "definition": "A web application for searching and viewing blockchain data including transactions, addresses, and network statistics. Cantonscan and CC View serve Canton.",
+    "relatedTerms": ["cantonscan", "ccview", "transaction"]
+  },
+  {
+    "slug": "wallet",
+    "term": "Wallet",
+    "definition": "Software that manages private keys and enables users to send, receive, and store digital assets. Loop Wallet and Bron are popular Canton wallets.",
+    "relatedTerms": ["self-custody", "private-key", "party"]
+  },
+  {
+    "slug": "self-custody",
+    "term": "Self-Custody",
+    "definition": "A model where users maintain sole control of their private keys and assets, without relying on a third-party custodian.",
+    "relatedTerms": ["wallet", "private-key", "decentralization"]
+  },
+  {
+    "slug": "private-key",
+    "term": "Private Key",
+    "definition": "A secret cryptographic key that proves ownership of assets and authorizes transactions. Must never be shared or exposed.",
+    "relatedTerms": ["wallet", "self-custody", "transaction"]
+  },
+  {
+    "slug": "tps",
+    "term": "TPS (Transactions Per Second)",
+    "definition": "A measure of blockchain throughput indicating how many transactions the network can process each second.",
+    "relatedTerms": ["transaction", "bandwidth", "network-stats"]
+  },
+  {
+    "slug": "epoch",
+    "term": "Epoch",
+    "definition": "A fixed time period in the Canton protocol during which validator sets and reward distributions are calculated.",
+    "relatedTerms": ["validator", "validator-reward", "staking"]
+  },
+  {
+    "slug": "finality",
+    "term": "Finality",
+    "definition": "The guarantee that a confirmed transaction cannot be reversed or altered. Canton achieves fast finality through its synchronizer-based consensus.",
+    "relatedTerms": ["confirmation", "synchronizer", "transaction"]
+  },
+  {
+    "slug": "interoperability",
+    "term": "Interoperability",
+    "definition": "The ability for different blockchain applications and networks to communicate and transact with each other. Canton achieves this via its synchronizer architecture.",
+    "relatedTerms": ["canton-network", "synchronizer", "atomic-transaction"]
+  },
+  {
+    "slug": "atomic-transaction",
+    "term": "Atomic Transaction",
+    "definition": "A transaction that either completes entirely or fails entirely, with no partial execution. Canton's synchronizer ensures atomicity across multiple applications.",
+    "relatedTerms": ["transaction", "synchronizer", "interoperability"]
+  },
+  {
+    "slug": "amulet",
+    "term": "Amulet",
+    "definition": "The protocol layer within Splice that manages Canton Coin issuance, reward distribution, and network fee mechanics.",
+    "relatedTerms": ["splice", "canton-coin", "validator-reward"]
+  },
+  {
+    "slug": "splice",
+    "term": "Splice",
+    "definition": "The infrastructure platform providing the Global Synchronizer, wallet kernel (SGK), and amulet protocol that form the operational backbone of Canton Network.",
+    "relatedTerms": ["global-synchronizer", "amulet", "canton-network"]
+  },
+  {
+    "slug": "sgk",
+    "term": "SGK (Splice Wallet Kernel)",
+    "definition": "A developer SDK by Splice/Five North that provides core wallet functionality for building Canton-compatible wallet applications.",
+    "relatedTerms": ["splice", "wallet", "loop-wallet"]
+  },
+  {
+    "slug": "ans",
+    "term": "ANS (Amulet Name Service)",
+    "definition": "Canton's naming service that maps human-readable names to party identifiers, similar to ENS on Ethereum.",
+    "relatedTerms": ["amulet", "party", "canton-network"]
+  },
+  {
+    "slug": "digital-asset",
+    "term": "Digital Asset (Company)",
+    "definition": "The technology company that created Daml and Canton, led by CEO Yuval Rooz, focused on institutional-grade blockchain infrastructure.",
+    "relatedTerms": ["daml", "canton-network", "canton-foundation"]
+  },
+  {
+    "slug": "decentralization",
+    "term": "Decentralization",
+    "definition": "The distribution of control and decision-making across a network of participants rather than a single central authority.",
+    "relatedTerms": ["governance", "validator", "self-custody"]
+  },
+  {
+    "slug": "market-cap",
+    "term": "Market Capitalization",
+    "definition": "The total value of a cryptocurrency calculated by multiplying the current price by the circulating supply. A key metric for comparing asset sizes.",
+    "relatedTerms": ["canton-coin", "circulating-supply", "price"]
+  },
+  {
+    "slug": "circulating-supply",
+    "term": "Circulating Supply",
+    "definition": "The number of tokens currently available and circulating in the market, excluding locked, burned, or reserved tokens.",
+    "relatedTerms": ["market-cap", "total-supply", "canton-coin"]
+  },
+  {
+    "slug": "total-supply",
+    "term": "Total Supply",
+    "definition": "The maximum number of tokens that will ever exist for a given cryptocurrency, including those not yet in circulation.",
+    "relatedTerms": ["circulating-supply", "market-cap", "tokenomics"]
+  },
+  {
+    "slug": "tokenomics",
+    "term": "Tokenomics",
+    "definition": "The economic model and incentive structure of a cryptocurrency, including supply schedules, distribution, utility, and fee mechanisms.",
+    "relatedTerms": ["canton-coin", "total-supply", "staking"]
+  },
+  {
+    "slug": "gas",
+    "term": "Gas",
+    "definition": "A unit measuring the computational effort required to execute transactions on a blockchain. Canton uses bandwidth-based fee models instead of traditional gas.",
+    "relatedTerms": ["transaction-fee", "bandwidth", "transaction"]
+  }
+]

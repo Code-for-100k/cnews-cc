@@ -1,0 +1,317 @@
+[
+  {
+    "slug": "canton-network",
+    "name": "Canton Network",
+    "description": "The privacy-enabled interoperable blockchain network built on Daml smart contracts, enabling seamless cross-application transactions.",
+    "category": "infrastructure",
+    "website": "https://www.canton.network",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "canton-foundation",
+    "name": "Canton Foundation",
+    "description": "The non-profit foundation governing the Canton Network, managing the Global Synchronizer and Canton Coin (CC) ecosystem.",
+    "category": "governance",
+    "website": "https://cantonfoundation.org",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "digital-asset",
+    "name": "Digital Asset",
+    "description": "The company behind Daml and Canton, providing smart contract infrastructure for institutional blockchain applications.",
+    "category": "development",
+    "website": "https://www.digitalasset.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "loop-wallet",
+    "name": "Loop Wallet",
+    "description": "A self-custodial Canton wallet by Five North enabling users to hold CC, CBTC, and USDCx with seamless dApp connectivity.",
+    "category": "wallet",
+    "website": "https://www.loopwallet.io",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "bron",
+    "name": "Bron",
+    "description": "A Canton Network wallet with built-in token management, staking delegation, and ecosystem exploration features.",
+    "category": "wallet",
+    "website": "https://bron.dev",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "temple",
+    "name": "Temple",
+    "description": "An institutional-grade decentralized exchange on Canton Network offering order-book trading for CC, CBTC, and USDCx pairs.",
+    "category": "exchange",
+    "website": "https://temple.exchange",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "acme",
+    "name": "ACME",
+    "description": "An automated market maker (AMM) and liquidity protocol on Canton enabling efficient token swaps and LP positions.",
+    "category": "defi",
+    "website": "https://acme.canton.network",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "alpend",
+    "name": "Alpend",
+    "description": "A decentralized lending and borrowing protocol on Canton Network, supporting CC and CBTC collateral with variable rate positions.",
+    "category": "defi",
+    "website": "https://alpend.fi",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "denex",
+    "name": "Denex",
+    "description": "A decentralized exchange aggregator on Canton Network that routes trades across multiple liquidity sources for optimal execution.",
+    "category": "exchange",
+    "website": "https://denex.fi",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "bitsafe-cbtc",
+    "name": "BitSafe / CBTC",
+    "description": "Issuer of CBTC, the canonical Bitcoin-backed token on Canton Network, enabling BTC holders to participate in Canton DeFi.",
+    "category": "tokenization",
+    "website": "https://bitsafe.finance",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "usdcx-circle",
+    "name": "USDCx (Circle)",
+    "description": "Circle's USDC representation on Canton Network providing regulated stablecoin liquidity for DeFi and trading.",
+    "category": "stablecoin",
+    "website": "https://www.circle.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "brale",
+    "name": "Brale",
+    "description": "Stablecoin infrastructure provider powering compliant fiat on/off-ramps and stablecoin issuance on Canton Network.",
+    "category": "stablecoin",
+    "website": "https://www.brale.xyz",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "hashnote-usyc",
+    "name": "Hashnote USYC",
+    "description": "Hashnote's US Yield Coin (USYC) on Canton, a tokenized short-duration US Treasury product for institutional yield.",
+    "category": "tokenization",
+    "website": "https://www.hashnote.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "cantonscan",
+    "name": "Cantonscan",
+    "description": "The primary block explorer for Canton Network, providing transaction search, validator stats, and network analytics.",
+    "category": "explorer",
+    "website": "https://cantonscan.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "ccview",
+    "name": "CC View",
+    "description": "A Canton Network explorer and analytics platform by PixelPlex with APIs for price data, validators, and on-chain metrics.",
+    "category": "explorer",
+    "website": "https://ccview.io",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "decparty",
+    "name": "DecParty",
+    "description": "A Canton identity and party management solution enabling decentralized governance participation and validator coordination.",
+    "category": "identity",
+    "website": "https://decparty.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "franklin-templeton-benji",
+    "name": "Franklin Templeton Benji",
+    "description": "Franklin Templeton's tokenized money market fund (FOBXX) brought to Canton Network via the Benji platform.",
+    "category": "institutional",
+    "website": "https://www.franklintempleton.com/investments/options/money-market-funds/products/702/SINGLCLASS/franklin-on-chain-u-s-government-money-fund",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "dtcc",
+    "name": "DTCC",
+    "description": "The Depository Trust & Clearing Corporation participating in Canton Network for institutional post-trade infrastructure.",
+    "category": "institutional",
+    "website": "https://www.dtcc.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "goldman-sachs",
+    "name": "Goldman Sachs",
+    "description": "Goldman Sachs Digital Assets division participating in Canton Network for tokenized asset settlement and interoperability.",
+    "category": "institutional",
+    "website": "https://www.goldmansachs.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "paxos",
+    "name": "Paxos",
+    "description": "Regulated blockchain infrastructure company providing tokenization and settlement technology integrated with Canton Network.",
+    "category": "institutional",
+    "website": "https://paxos.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "archax",
+    "name": "Archax",
+    "description": "FCA-regulated digital asset exchange and custodian operating on Canton Network for institutional digital securities.",
+    "category": "institutional",
+    "website": "https://www.archax.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "splice",
+    "name": "Splice",
+    "description": "The core infrastructure layer for Canton providing the Global Synchronizer, wallet kernel, and amulet protocol for CC.",
+    "category": "infrastructure",
+    "website": "https://www.splice.us",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "zoro-wallet",
+    "name": "Zoro Wallet",
+    "description": "A Canton wallet with API-first design for developers, supporting CC, CBTC, and programmatic token transfers.",
+    "category": "wallet",
+    "website": "https://zoro.dev",
+    "logo": null,
+    "status": "beta"
+  },
+  {
+    "slug": "daml",
+    "name": "Daml",
+    "description": "The smart contract language powering Canton Network, designed for privacy-preserving multi-party workflows.",
+    "category": "development",
+    "website": "https://www.digitalasset.com/developers",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "global-synchronizer",
+    "name": "Global Synchronizer",
+    "description": "The shared sequencing layer of Canton Network ensuring atomic transaction ordering and finality across all participants.",
+    "category": "infrastructure",
+    "website": "https://www.canton.network",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "broadridge",
+    "name": "Broadridge",
+    "description": "Global fintech company leveraging Canton Network for distributed ledger-based securities processing and repo agreements.",
+    "category": "institutional",
+    "website": "https://www.broadridge.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "cboe-digital",
+    "name": "Cboe Digital",
+    "description": "Cboe's digital asset marketplace participating in Canton Network for compliant institutional digital asset trading.",
+    "category": "institutional",
+    "website": "https://www.cboedigital.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "deloitte",
+    "name": "Deloitte",
+    "description": "Big Four consultancy involved in Canton Network ecosystem for enterprise blockchain advisory and integration services.",
+    "category": "institutional",
+    "website": "https://www.deloitte.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "moody-s",
+    "name": "Moody's",
+    "description": "Global credit rating agency exploring Canton Network for transparent, on-chain credit assessment and data feeds.",
+    "category": "institutional",
+    "website": "https://www.moodys.com",
+    "logo": null,
+    "status": "announced"
+  },
+  {
+    "slug": "s-and-p-global",
+    "name": "S&P Global",
+    "description": "Financial intelligence company participating in the Canton Network for institutional data interoperability and tokenized markets.",
+    "category": "institutional",
+    "website": "https://www.spglobal.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "alchemy",
+    "name": "Alchemy",
+    "description": "Web3 developer platform providing node infrastructure, APIs, and analytics for Canton Network developers.",
+    "category": "infrastructure",
+    "website": "https://www.alchemy.com",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "pixelplex",
+    "name": "PixelPlex",
+    "description": "Blockchain development studio building explorer and analytics tools for Canton Network including CC View.",
+    "category": "development",
+    "website": "https://pixelplex.io",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "five-north",
+    "name": "Five North",
+    "description": "The team behind Loop Wallet, building self-custodial wallet infrastructure and the Splice Wallet Kernel SDK for Canton.",
+    "category": "development",
+    "website": "https://www.fivenorth.dev",
+    "logo": null,
+    "status": "live"
+  },
+  {
+    "slug": "vala",
+    "name": "Vala",
+    "description": "Canton Network staking and delegation platform enabling CC holders to earn rewards through validator participation.",
+    "category": "defi",
+    "website": "https://vala.network",
+    "logo": null,
+    "status": "beta"
+  },
+  {
+    "slug": "noves",
+    "name": "Noves",
+    "description": "Transaction enrichment and human-readable transaction interpretation API integrated with Canton Network.",
+    "category": "analytics",
+    "website": "https://noves.fi",
+    "logo": null,
+    "status": "live"
+  }
+]
