@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { AnimatedSection } from "@/components/ui/animated-section";
 
 const footerLinks = {
   Explore: [
@@ -32,44 +35,49 @@ const footerLinks = {
 export function Footer() {
   return (
     <footer className="border-t border-border/50 bg-card/30">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="text-sm font-semibold text-foreground">
-                {category}
-              </h3>
-              <ul className="mt-3 space-y-2">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-canton"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      {/* Animated gradient border line at top */}
+      <div className="animate-gradient-border h-px w-full" />
 
-        <Separator className="my-8 bg-border/50" />
-
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-canton">cnews</span>
-            <span className="text-lg font-bold text-muted-foreground">.cc</span>
+      <AnimatedSection direction="up" duration={0.7}>
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="text-sm font-semibold text-foreground">
+                  {category}
+                </h3>
+                <ul className="mt-3 space-y-2">
+                  {links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-muted-foreground transition-colors hover:text-canton"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <p className="text-xs text-muted-foreground">
-            Powered by Canton Network data
-          </p>
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} cnews.cc. All rights reserved.
-          </p>
+
+          <Separator className="my-8 bg-border/50" />
+
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold text-canton">cnews</span>
+              <span className="text-lg font-bold text-muted-foreground">.cc</span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Powered by Canton Network data
+            </p>
+            <p className="text-xs text-muted-foreground">
+              &copy; {new Date().getFullYear()} cnews.cc. All rights reserved.
+            </p>
+          </div>
         </div>
-      </div>
+      </AnimatedSection>
     </footer>
   );
 }

@@ -189,3 +189,16 @@ export interface PaginatedResponse<T> {
   pageSize: number;
   hasMore: boolean;
 }
+
+// ---- Content Verification ----
+
+export type VerificationStatus = 'ai-generated' | 'human-verified' | 'editors-pick';
+
+export interface ContentVerification {
+  status: VerificationStatus;
+  verifiedBy?: string;
+  verifiedAt?: string;
+  aiModel?: string;
+  aiGeneratedAt: string;
+  confidenceScore: number; // 0-100
+}

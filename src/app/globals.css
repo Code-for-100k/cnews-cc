@@ -167,6 +167,35 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Shimmer animation for text gradient highlight */
+@keyframes shimmer {
+  0% { background-position: -200% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Animated gradient border for header/footer lines */
+@keyframes gradient-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Subtle glow pulse for CC badge */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px oklch(0.78 0.15 170 / 20%), 0 0 12px oklch(0.78 0.15 170 / 0%);
+  }
+  50% {
+    box-shadow: 0 0 6px oklch(0.78 0.15 170 / 40%), 0 0 18px oklch(0.78 0.15 170 / 12%);
+  }
+}
+
+/* Shimmer overlay sweep for cards */
+@keyframes shimmer-overlay {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient-shift 6s ease infinite;
@@ -182,6 +211,56 @@
 
 .animate-counter-up {
   animation: counter-up 0.5s ease-out both;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-gradient-border {
+  background: linear-gradient(90deg, oklch(0.78 0.15 170), oklch(0.75 0.12 200), oklch(0.72 0.14 160), oklch(0.78 0.15 170));
+  background-size: 300% 100%;
+  animation: gradient-border 4s ease infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Nav underline animation */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: oklch(0.78 0.15 170);
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.25, 0.4, 0.25, 1), left 0.3s cubic-bezier(0.25, 0.4, 0.25, 1);
+}
+.nav-underline:hover::after,
+.nav-underline[data-active="true"]::after {
+  width: 100%;
+  left: 0%;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-shimmer,
+  .animate-gradient-border,
+  .animate-glow-pulse,
+  .animate-gradient,
+  .animate-pulse-glow,
+  .animate-float {
+    animation: none !important;
+  }
+  .nav-underline::after {
+    transition: none !important;
+  }
 }
 
 /* Glassmorphism utility */

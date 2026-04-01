@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { PriceTicker } from "@/components/layout/price-ticker";
+import { UserMenu } from "@/components/auth/user-menu";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -27,13 +29,32 @@ const navItems = [
 
 export function Header() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-backdrop-filter:bg-background/60 transition-all duration-300",
+        scrolled ? "h-12" : "h-14"
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-all duration-300",
+          scrolled ? "h-12" : "h-14"
+        )}
+      >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1.5">
-          <div className="flex size-7 items-center justify-center rounded-lg bg-canton font-mono text-xs font-black text-canton-foreground">
+          <div className="flex size-7 items-center justify-center rounded-lg bg-canton font-mono text-xs font-black text-canton-foreground animate-glow-pulse">
             CC
           </div>
           <span className="text-lg font-bold tracking-tight">
@@ -53,8 +74,9 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                data-active={isActive}
                 className={cn(
-                  "rounded-lg px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
+                  "nav-underline rounded-lg px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
                   isActive
                     ? "bg-accent text-canton"
                     : "text-muted-foreground"
@@ -69,6 +91,7 @@ export function Header() {
         {/* Right side */}
         <div className="flex items-center gap-3">
           <PriceTicker />
+          <UserMenu />
 
           {/* Mobile menu */}
           <Sheet>
@@ -117,6 +140,9 @@ export function Header() {
           </Sheet>
         </div>
       </div>
+
+      {/* Animated gradient border line at bottom */}
+      <div className="animate-gradient-border h-px w-full" />
     </header>
   );
 }

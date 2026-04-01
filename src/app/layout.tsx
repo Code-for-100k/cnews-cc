@@ -3,8 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PageTransition } from "@/components/layout/page-transition";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { WebsiteJsonLd, OrganizationJsonLd } from "@/components/seo/json-ld";
+import { SessionProvider } from "@/components/auth/session-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,13 +77,17 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <TooltipProvider>
-          <WebsiteJsonLd />
-          <OrganizationJsonLd />
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </TooltipProvider>
+        <SessionProvider>
+          <TooltipProvider>
+            <WebsiteJsonLd />
+            <OrganizationJsonLd />
+            <Header />
+            <main className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <Footer />
+          </TooltipProvider>
+        </SessionProvider>
       </body>
     </html>
   );

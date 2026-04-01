@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   DollarSign,
@@ -18,10 +20,51 @@ import {
   Globe,
   Code,
 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { StatsCard } from "@/components/charts/stats-card";
+import { VerifiedFeed } from "@/components/homepage/verified-feed";
+import { AiActivityFeed } from "@/components/homepage/ai-activity-feed";
+import { AnimatedSection } from "@/components/ui/animated-section";
+import { ShimmerText } from "@/components/ui/shimmer-text";
+import {
+  MorphingLayoutProvider,
+  MorphingGrid,
+  MorphingItem,
+  ModeToggle,
+  useMorphingLayout,
+} from "@/components/ui/morphing-layout";
+
+/* ---------- Stagger container + item variants ---------- */
+const staggerContainer = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const slideInLeft = {
+  hidden: { opacity: 0, x: -20 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] as const },
+  },
+};
+
+const slideInRight = {
+  hidden: { opacity: 0, x: 20 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: [0.25, 0.4, 0.25, 1] as const },
+  },
+};
 
 /* ---------- Mock data ---------- */
 
@@ -114,265 +157,429 @@ const ecosystemCategories = [
   { label: "Developer Tools", icon: Code, count: 22 },
 ];
 
-/* ---------- Component ---------- */
+/* ---------- Sub-components ---------- */
 
-export default function HomePage() {
+function StaggeredTokenTable() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={staggerContainer}
+      initial="hidden"
+      animate={isInView ? "show" : "hidden"}
+    >
+      <Card>
+        <CardContent className="space-y-0 divide-y divide-border/50">
+          {topTokens.map((token) => (
+            <motion.div key={token.symbol} variants={slideInLeft}>
+              <Link
+                href={`/tokens/${token.symbol.toLowerCase()}`}
+                className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
+              >
+                <div>
+                  <p className="text-sm font-medium">{token.symbol}</p>
+                  <p className="text-xs text-muted-foreground">{token.name}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-medium tabular-nums">
+                    {token.price}
+                  </p>
+                  <p
+                    className={`flex items-center justify-end gap-0.5 text-xs tabular-nums ${
+                      token.change >= 0 ? "text-positive" : "text-negative"
+                    }`}
+                  >
+                    {token.change >= 0 ? (
+                      <TrendingUp className="size-3" />
+                    ) : (
+                      <TrendingDown className="size-3" />
+                    )}
+                    {token.change >= 0 ? "+" : ""}
+                    {token.change.toFixed(2)}%
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
+function StaggeredValidatorList() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={staggerContainer}
+      initial="hidden"
+      animate={isInView ? "show" : "hidden"}
+    >
+      <Card>
+        <CardContent className="space-y-0 divide-y divide-border/50">
+          {topValidators.map((v) => (
+            <motion.div key={v.name} variants={slideInRight}>
+              <Link
+                href={`/validators/${v.name.toLowerCase().replace(/\s+/g, "-")}`}
+                className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="flex size-6 items-center justify-center rounded-md bg-canton-muted text-xs font-bold text-canton">
+                    {v.rank}
+                  </span>
+                  <p className="text-sm font-medium">{v.name}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs tabular-nums text-muted-foreground">
+                    {v.stake}
+                  </p>
+                  <p className="text-xs text-positive">{v.uptime}</p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
+/* ---------- Main content that uses MorphingLayout context ---------- */
+
+function HomeContent() {
+  const { mode } = useMorphingLayout();
+  const heroRef = useRef<HTMLElement>(null);
+  const heroInView = useInView(heroRef, { once: true });
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero */}
-      <section className="relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-canton/5 via-background to-cyan-500/5 px-6 pb-10 pt-8 text-center sm:px-12 sm:pb-14 sm:pt-12">
+      <motion.section
+        ref={heroRef}
+        initial={{ opacity: 0, y: 24 }}
+        animate={heroInView ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+        className="relative overflow-hidden rounded-2xl border border-border/40 bg-gradient-to-br from-canton/5 via-background to-cyan-500/5 px-6 pb-10 pt-8 text-center sm:px-12 sm:pb-14 sm:pt-12"
+      >
         {/* Decorative grid */}
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,212,170,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,170,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
         {/* Decorative glow orbs */}
         <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-canton/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-12 right-1/4 h-32 w-64 rounded-full bg-cyan-500/8 blur-3xl" />
         <div className="relative">
-          <Badge variant="secondary" className="mb-4 border-canton/20 bg-canton/10 text-canton">
-            Live Canton Network Data
-          </Badge>
-          <h1 className="bg-gradient-to-r from-white via-white to-canton bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl lg:text-5xl xl:text-6xl">
-            The Canton Network
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={heroInView ? { opacity: 1, scale: 1 } : undefined}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Badge
+              variant="secondary"
+              className="mb-4 border-canton/20 bg-canton/10 text-canton"
+            >
+              Live Canton Network Data
+            </Badge>
+          </motion.div>
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
+            <span className="bg-gradient-to-r from-white via-white to-canton bg-clip-text text-transparent">
+              The Canton Network
+            </span>
             <br />
-            <span className="bg-gradient-to-r from-canton via-emerald-400 to-cyan-400 bg-clip-text">Intelligence Hub</span>
+            <ShimmerText
+              as="span"
+              className="bg-gradient-to-r from-canton via-emerald-400 to-cyan-400 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl"
+            >
+              Intelligence Hub
+            </ShimmerText>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Real-time analytics, validator metrics, token data, and DeFi insights
-            for the Canton ecosystem — all in one place.
-          </p>
-          <div className="mt-6 flex items-center justify-center gap-3">
-            <Link href="/tokens" className="inline-flex h-10 items-center gap-2 rounded-lg bg-canton px-5 text-sm font-medium text-canton-foreground transition-all hover:bg-canton/90 hover:shadow-lg hover:shadow-canton/20">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={heroInView ? { opacity: 1 } : undefined}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          >
+            Real-time analytics, validator metrics, token data, and DeFi
+            insights for the Canton ecosystem — all in one place.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : undefined}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-6 flex items-center justify-center gap-3"
+          >
+            <Link
+              href="/tokens"
+              className="inline-flex h-10 items-center gap-2 rounded-lg bg-canton px-5 text-sm font-medium text-canton-foreground transition-all hover:bg-canton/90 hover:shadow-lg hover:shadow-canton/20"
+            >
               Explore Tokens <ChevronRight className="size-4" />
             </Link>
-            <Link href="/tools/cc-reward-calculator" className="inline-flex h-10 items-center gap-2 rounded-lg border border-border/60 bg-card/50 px-5 text-sm font-medium text-foreground transition-all hover:border-canton/40 hover:bg-card">
+            <Link
+              href="/tools/cc-reward-calculator"
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-border/60 bg-card/50 px-5 text-sm font-medium text-foreground transition-all hover:border-canton/40 hover:bg-card"
+            >
               Calculate Rewards
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Stats bar */}
-      <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {networkStats.map((stat) => (
-          <StatsCard
-            key={stat.label}
-            icon={stat.icon}
-            label={stat.label}
-            value={stat.value}
-            change={stat.change}
-            suffix={stat.suffix}
-          />
-        ))}
-      </section>
+      <AnimatedSection direction="up" delay={0.1}>
+        <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {networkStats.map((stat) => (
+            <StatsCard
+              key={stat.label}
+              icon={stat.icon}
+              label={stat.label}
+              value={stat.value}
+              change={stat.change}
+              suffix={stat.suffix}
+            />
+          ))}
+        </section>
+      </AnimatedSection>
+
+      {/* AI Content Verification System */}
+      <AnimatedSection direction="up" delay={0.15}>
+        <section className="mt-10">
+          <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
+            <VerifiedFeed />
+            <aside className="space-y-4">
+              <AiActivityFeed />
+            </aside>
+          </div>
+        </section>
+      </AnimatedSection>
 
       <Separator className="my-10 bg-border/30" />
 
-      {/* Two-column layout: News + Tokens/Validators */}
-      <div className="grid gap-8 lg:grid-cols-3">
-        {/* Latest News -- takes 2 cols */}
-        <section className="lg:col-span-2">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-lg font-semibold">
-              <Newspaper className="size-5 text-canton" />
-              Latest News
-            </h2>
-            <Link
-              href="/blog"
-              className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
-            >
-              View all
-              <ChevronRight className="size-4" />
-            </Link>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {latestNews.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}>
-                <Card className="h-full transition-colors hover:border-canton/30 hover:bg-card/80">
-                  <CardHeader>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="text-xs">
-                        {post.category}
-                      </Badge>
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Clock className="size-3" />
-                        {post.date}
-                      </span>
-                    </div>
-                    <CardTitle className="line-clamp-2 text-sm leading-snug">
-                      {post.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="line-clamp-3 text-xs text-muted-foreground">
-                      {post.excerpt}
-                    </p>
-                  </CardContent>
-                </Card>
+      {/* View mode toggle */}
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          View Mode
+        </h2>
+        <ModeToggle />
+      </div>
+
+      {/* Morphing content grid */}
+      <MorphingGrid>
+        {/* Latest News */}
+        <MorphingItem
+          layoutId="news-section"
+          className={mode === "dashboard" ? "lg:col-span-2" : ""}
+        >
+          <section>
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="flex items-center gap-2 text-lg font-semibold">
+                <Newspaper className="size-5 text-canton" />
+                Latest News
+              </h2>
+              <Link
+                href="/blog"
+                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
+              >
+                View all
+                <ChevronRight className="size-4" />
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+            <AnimatedSection direction="up" delay={0.1}>
+              <div
+                className={
+                  mode === "compact"
+                    ? "space-y-2"
+                    : "grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                }
+              >
+                {latestNews.map((post, i) => (
+                  <motion.div
+                    key={post.slug}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.4,
+                      delay: i * 0.1,
+                      ease: [0.25, 0.4, 0.25, 1],
+                    }}
+                  >
+                    <Link href={`/blog/${post.slug}`}>
+                      <Card className="card-hover group h-full transition-colors hover:border-canton/30 hover:bg-card/80">
+                        <CardHeader>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="secondary" className="text-xs">
+                              {post.category}
+                            </Badge>
+                            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                              <Clock className="size-3" />
+                              {post.date}
+                            </span>
+                          </div>
+                          <CardTitle className="line-clamp-2 text-sm leading-snug">
+                            {post.title}
+                          </CardTitle>
+                        </CardHeader>
+                        {mode !== "compact" && (
+                          <CardContent>
+                            <p className="line-clamp-3 text-xs text-muted-foreground">
+                              {post.excerpt}
+                            </p>
+                          </CardContent>
+                        )}
+                      </Card>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </section>
+        </MorphingItem>
 
         {/* Sidebar: Top Tokens + Validators */}
-        <aside className="space-y-8">
-          {/* Top Tokens */}
-          <div>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-lg font-semibold">
-                <TrendingUp className="size-5 text-canton" />
-                Top Tokens
-              </h2>
-              <Link
-                href="/tokens"
-                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
-              >
-                All
-                <ChevronRight className="size-4" />
-              </Link>
+        <MorphingItem layoutId="sidebar-section">
+          <aside className="space-y-8">
+            {/* Top Tokens */}
+            <div>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="flex items-center gap-2 text-lg font-semibold">
+                  <TrendingUp className="size-5 text-canton" />
+                  Top Tokens
+                </h2>
+                <Link
+                  href="/tokens"
+                  className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
+                >
+                  All
+                  <ChevronRight className="size-4" />
+                </Link>
+              </div>
+              <StaggeredTokenTable />
             </div>
-            <Card>
-              <CardContent className="space-y-0 divide-y divide-border/50">
-                {topTokens.map((token) => (
-                  <Link
-                    key={token.symbol}
-                    href={`/tokens/${token.symbol.toLowerCase()}`}
-                    className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-                  >
-                    <div>
-                      <p className="text-sm font-medium">{token.symbol}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {token.name}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-medium tabular-nums">
-                        {token.price}
-                      </p>
-                      <p
-                        className={`flex items-center justify-end gap-0.5 text-xs tabular-nums ${
-                          token.change >= 0
-                            ? "text-positive"
-                            : "text-negative"
-                        }`}
-                      >
-                        {token.change >= 0 ? (
-                          <TrendingUp className="size-3" />
-                        ) : (
-                          <TrendingDown className="size-3" />
-                        )}
-                        {token.change >= 0 ? "+" : ""}
-                        {token.change.toFixed(2)}%
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
 
-          {/* Validator Leaderboard */}
-          <div>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-lg font-semibold">
-                <Shield className="size-5 text-canton" />
-                Validators
-              </h2>
-              <Link
-                href="/validators"
-                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
-              >
-                All
-                <ChevronRight className="size-4" />
-              </Link>
+            {/* Validator Leaderboard */}
+            <div>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="flex items-center gap-2 text-lg font-semibold">
+                  <Shield className="size-5 text-canton" />
+                  Validators
+                </h2>
+                <Link
+                  href="/validators"
+                  className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-canton"
+                >
+                  All
+                  <ChevronRight className="size-4" />
+                </Link>
+              </div>
+              <StaggeredValidatorList />
             </div>
-            <Card>
-              <CardContent className="space-y-0 divide-y divide-border/50">
-                {topValidators.map((v) => (
-                  <Link
-                    key={v.name}
-                    href={`/validators/${v.name
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`}
-                    className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <span className="flex size-6 items-center justify-center rounded-md bg-canton-muted text-xs font-bold text-canton">
-                        {v.rank}
-                      </span>
-                      <p className="text-sm font-medium">{v.name}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xs tabular-nums text-muted-foreground">
-                        {v.stake}
-                      </p>
-                      <p className="text-xs text-positive">{v.uptime}</p>
-                    </div>
-                  </Link>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-        </aside>
-      </div>
+          </aside>
+        </MorphingItem>
+      </MorphingGrid>
 
       <Separator className="my-8 bg-border/50" />
 
       {/* Featured Tools */}
-      <section>
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-          <Zap className="size-5 text-canton" />
-          Featured Tools
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {featuredTools.map((tool) => (
-            <Link key={tool.href} href={tool.href}>
-              <Card className="group h-full transition-colors hover:border-canton/30">
-                <CardContent className="flex items-start gap-4">
-                  <div className="rounded-lg bg-canton-muted p-2.5">
-                    <tool.icon className="size-5 text-canton" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-sm font-semibold">{tool.title}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {tool.description}
-                    </p>
-                  </div>
-                  <ExternalLink className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <AnimatedSection direction="up" delay={0.1}>
+        <section>
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+            <Zap className="size-5 text-canton" />
+            Featured Tools
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {featuredTools.map((tool, i) => (
+              <motion.div
+                key={tool.href}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.1,
+                  ease: [0.25, 0.4, 0.25, 1],
+                }}
+              >
+                <Link href={tool.href}>
+                  <Card className="card-hover group h-full transition-colors hover:border-canton/30">
+                    <CardContent className="flex items-start gap-4">
+                      <div className="rounded-lg bg-canton-muted p-2.5">
+                        <tool.icon className="size-5 text-canton" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-sm font-semibold">{tool.title}</h3>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {tool.description}
+                        </p>
+                      </div>
+                      <ExternalLink className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
 
       <Separator className="my-8 bg-border/50" />
 
       {/* Canton Ecosystem */}
-      <section className="pb-4">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
-          <Globe className="size-5 text-canton" />
-          Canton Ecosystem
-        </h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {ecosystemCategories.map((cat) => (
-            <Link
-              key={cat.label}
-              href={`/ecosystem?category=${cat.label.toLowerCase()}`}
-            >
-              <Card className="group text-center transition-colors hover:border-canton/30">
-                <CardContent className="flex flex-col items-center gap-2 py-2">
-                  <div className="rounded-lg bg-canton-muted p-3 transition-colors group-hover:bg-canton/20">
-                    <cat.icon className="size-5 text-canton" />
-                  </div>
-                  <p className="text-sm font-medium">{cat.label}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {cat.count} projects
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <AnimatedSection direction="up" delay={0.1}>
+        <section className="pb-4">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold">
+            <Globe className="size-5 text-canton" />
+            Canton Ecosystem
+          </h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {ecosystemCategories.map((cat, i) => (
+              <motion.div
+                key={cat.label}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{
+                  scale: 1.04,
+                  transition: { type: "spring", stiffness: 400, damping: 20 },
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.08,
+                  ease: [0.25, 0.4, 0.25, 1],
+                }}
+              >
+                <Link
+                  href={`/ecosystem?category=${cat.label.toLowerCase()}`}
+                >
+                  <Card className="group text-center transition-colors hover:border-canton/30 hover:shadow-lg hover:shadow-canton/5">
+                    <CardContent className="flex flex-col items-center gap-2 py-2">
+                      <div className="rounded-lg bg-canton-muted p-3 transition-colors group-hover:bg-canton/20">
+                        <cat.icon className="size-5 text-canton" />
+                      </div>
+                      <p className="text-sm font-medium">{cat.label}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {cat.count} projects
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </AnimatedSection>
     </div>
+  );
+}
+
+/* ---------- Page wrapper with MorphingLayoutProvider ---------- */
+
+export default function HomePage() {
+  return (
+    <MorphingLayoutProvider>
+      <HomeContent />
+    </MorphingLayoutProvider>
   );
 }
