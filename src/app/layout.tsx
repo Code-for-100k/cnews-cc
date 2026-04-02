@@ -7,6 +7,7 @@ import { PageTransition } from "@/components/layout/page-transition";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { WebsiteJsonLd, OrganizationJsonLd } from "@/components/seo/json-ld";
 import { SessionProvider } from "@/components/auth/session-provider";
+import { AIConcierge } from "@/components/ai/concierge";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,6 +87,7 @@ export default function RootLayout({
               <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
+            <AIConcierge />
           </TooltipProvider>
         </SessionProvider>
       </body>
